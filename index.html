@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Grade Calc</title>
+    <meta
+      name="description"
+      content="Weighted class grades, the score you need on a final, and GPA."
+    />
+    <meta name="theme-color" content="#efeae1" />
+    <link rel="icon" href="%BASE_URL%favicon.svg" type="image/svg+xml" />
+    <script>
+      try {
+        var stored = JSON.parse(localStorage.getItem("grade-calc.v1") || "null");
+        var choice = stored && stored.theme;
+        var theme =
+          choice === "light" || choice === "dark"
+            ? choice
+            : matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+        document.documentElement.dataset.theme = theme;
+      } catch (error) {
+        /* The app sets the theme again once it loads. */
+      }
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

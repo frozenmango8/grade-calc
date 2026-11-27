@@ -10,6 +10,21 @@
     />
     <meta name="theme-color" content="#efeae1" />
     <link rel="icon" href="%BASE_URL%favicon.svg" type="image/svg+xml" />
+    <script>
+      try {
+        var stored = JSON.parse(localStorage.getItem("grade-calc.v1") || "null");
+        var choice = stored && stored.theme;
+        var theme =
+          choice === "light" || choice === "dark"
+            ? choice
+            : matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+        document.documentElement.dataset.theme = theme;
+      } catch (error) {
+        /* The app sets the theme again once it loads. */
+      }
+    </script>
   </head>
   <body>
     <div id="app"></div>

@@ -157,7 +157,7 @@ describe("classGrade", () => {
   it("drops every score when asked to drop at least that many", () => {
     const result = classGrade([category(50, [[9, 10], [8, 10]], 5), category(50, [[40, 50]])]);
     expect(result.categories[0]).toMatchObject({
-      reason: "empty",
+      reason: "all-dropped",
       dropped: [0, 1],
       kept: [],
       percent: null,

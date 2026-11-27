@@ -12,7 +12,7 @@ export interface CategoryInput {
   assignments: AssignmentScore[];
 }
 
-export type CategoryExcludeReason = "invalid-weight" | "zero-weight" | "empty";
+export type CategoryExcludeReason = "invalid-weight" | "zero-weight" | "empty" | "all-dropped";
 
 export interface CategoryResult {
   /** Exact category percentage from pooled points. Null when nothing was kept. */
@@ -115,7 +115,12 @@ export function classGrade(categories: CategoryInput[]): ClassGradeResult {
       return { ...base, weight: 0, included: false, reason: "zero-weight" };
     }
     if (keptRows.length === 0) {
-      return { ...base, weight, included: false, reason: "empty" };
+      return {
+        ...base,
+        weight,
+        included: false,
+        reason: dropped.length > 0 ? "all-dropped" : "empty",
+      };
     }
     return { ...base, weight, included: true, reason: null };
   });
